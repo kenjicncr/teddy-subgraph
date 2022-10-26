@@ -1,19 +1,19 @@
-import { BigInt, log } from '@graphprotocol/graph-ts';
+import { BigInt, log } from "@graphprotocol/graph-ts";
 import {
   AuctionBid,
   AuctionCreated,
   AuctionExtended,
   AuctionSettled,
-} from './types/TeddyAuctionHouse/TeddyAuctionHouse';
-import { Auction, Bid, Teddy } from './types/schema';
-import { getOrCreateAccount } from './utils/helpers';
+} from "./types/TeddyAuctionHouse/TeddyAuctionHouse";
+import { Auction, Bid, Teddy } from "./types/schema";
+import { getOrCreateAccount } from "./utils/helpers";
 
 export function handleAuctionCreated(event: AuctionCreated): void {
   const teddyId = event.params.teddyId.toString();
 
   const teddy = Teddy.load(teddyId);
-  if (teddy == null) {
-    log.error('[handleAuctionCreated] Noun #{} not found. Hash: {}', [
+  if (!teddy) {
+    log.error("[handleAuctionCreated] Noun #{} not found. Hash: {}", [
       teddyId,
       event.transaction.hash.toHex(),
     ]);
@@ -37,7 +37,7 @@ export function handleAuctionBid(event: AuctionBid): void {
 
   const auction = Auction.load(teddyId);
   if (auction == null) {
-    log.error('[handleAuctionBid] Auction not found for Noun #{}. Hash: {}', [
+    log.error("[handleAuctionBid] Auction not found for Noun #{}. Hash: {}", [
       teddyId,
       event.transaction.hash.toHex(),
     ]);
@@ -65,10 +65,10 @@ export function handleAuctionExtended(event: AuctionExtended): void {
 
   const auction = Auction.load(teddyId);
   if (auction == null) {
-    log.error('[handleAuctionExtended] Auction not found for Noun #{}. Hash: {}', [
-      teddyId,
-      event.transaction.hash.toHex(),
-    ]);
+    log.error(
+      "[handleAuctionExtended] Auction not found for Noun #{}. Hash: {}",
+      [teddyId, event.transaction.hash.toHex()]
+    );
     return;
   }
 
@@ -81,10 +81,10 @@ export function handleAuctionSettled(event: AuctionSettled): void {
 
   const auction = Auction.load(teddyId);
   if (auction == null) {
-    log.error('[handleAuctionSettled] Auction not found for Noun #{}. Hash: {}', [
-      teddyId,
-      event.transaction.hash.toHex(),
-    ]);
+    log.error(
+      "[handleAuctionSettled] Auction not found for Noun #{}. Hash: {}",
+      [teddyId, event.transaction.hash.toHex()]
+    );
     return;
   }
 

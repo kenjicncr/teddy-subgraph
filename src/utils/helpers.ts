@@ -1,7 +1,11 @@
-import { Account } from '../types/schema';
-import { ZERO_ADDRESS, BIGINT_ZERO, BIGINT_ONE } from './constants';
+import { Account } from "../types/schema";
+import { ZERO_ADDRESS, BIGINT_ZERO, BIGINT_ONE } from "./constants";
 
-export function getOrCreateAccount(id: string, createIfNotFound = true, save = true): Account {
+export function getOrCreateAccount(
+  id: string,
+  createIfNotFound: boolean = true,
+  save: boolean = true
+): Account {
   let tokenHolder = Account.load(id);
 
   if (tokenHolder == null && createIfNotFound) {
