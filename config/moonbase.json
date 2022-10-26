@@ -1,0 +1,11 @@
+{
+  "network": "moonbaseAlpha",
+  "teddyToken": {
+    "address": "0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4",
+    "startBlock": 3069272
+  },
+  "teddyAuctionHouse": {
+    "address": "0x165B31426aD1Ea70b25FbD1D738B4eDf07bD0151",
+    "startBlock": 3069272
+  }
+}

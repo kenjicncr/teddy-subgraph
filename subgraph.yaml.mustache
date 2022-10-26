@@ -1,0 +1,59 @@
+specVersion: 0.0.3
+description: >-
+  Randomly generated avatar NFTs auctioned daily.
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: TeddyAuctionHouse
+    network: {{network}}
+    source:
+      address: '{{teddyAuctionHouse.address}}'
+      abi: TeddyAuctionHouse
+      startBlock: {{teddyAuctionHouse.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/teddy-auction-house.ts
+      entities:
+        - Account
+        - Auction
+        - Bid
+        - Teddy
+      abis:
+        - name: TeddyAuctionHouse
+          file: ./src/abi/TeddyAuctionHouse.json
+      eventHandlers:
+        - event: AuctionCreated(indexed uint256,uint256,uint256)
+          handler: handleAuctionCreated
+        - event: AuctionBid(indexed uint256,address,uint256,bool)
+          handler: handleAuctionBid
+        - event: AuctionExtended(indexed uint256,uint256)
+          handler: handleAuctionExtended
+        - event: AuctionSettled(indexed uint256,address,uint256,string,string)
+          handler: handleAuctionSettled
+  - kind: ethereum/contract
+    name: TeddyToken
+    network: {{network}}
+    source:
+      address: '{{teddyToken.address}}'
+      abi: TeddyToken
+      startBlock: {{teddyToken.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/teddy-erc-721.ts
+      entities:
+        - Teddy
+        - Seed
+        - Account
+      abis:
+        - name: TeddyToken
+          file: ./src/abi/TeddyToken.json
+      eventHandlers:
+        - event: TeddyCreated(indexed uint256,(uint48,uint48,uint48,uint48,uint48))
+          handler: handleTeddyCreated
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
