@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: TeddyAuctionHouse
-    network: moonbaseAlpha
+    network: mbase
     source:
       address: '0x165B31426aD1Ea70b25FbD1D738B4eDf07bD0151'
       abi: TeddyAuctionHouse
@@ -35,7 +35,7 @@ dataSources:
           handler: handleAuctionSettled
   - kind: ethereum/contract
     name: TeddyToken
-    network: moonbaseAlpha
+    network: mbase
     source:
       address: '0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4'
       abi: TeddyToken

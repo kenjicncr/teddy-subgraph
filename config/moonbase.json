@@ -1,5 +1,5 @@
 {
-  "network": "moonbaseAlpha",
+  "network": "mbase",
   "teddyToken": {
     "address": "0xbb0d733BDBe151dae3cEf8D7D63cBF74cCbf04C4",
     "startBlock": 3069272
